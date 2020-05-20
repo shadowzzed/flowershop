@@ -5,10 +5,7 @@ import com.ntu.flower.shop.domain.*;
 import com.ntu.flower.shop.exception.MyException;
 import com.ntu.flower.shop.exception.ex.MyExceptionEnum;
 import com.ntu.flower.shop.repo.FlowerRepo;
-import com.ntu.flower.shop.service.FlowerService;
-import com.ntu.flower.shop.service.OrderService;
-import com.ntu.flower.shop.service.UserCollectService;
-import com.ntu.flower.shop.service.UserService;
+import com.ntu.flower.shop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +32,9 @@ public class ApiController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ShoppingCarService shoppingCarService;
 
     @Autowired
     private OrderService orderService;
@@ -174,6 +174,38 @@ public class ApiController {
                 .build();
     }
 
+    @GetMapping("/api/v1/shopping/car/one/{userAccount}")
+    public Resp getOneShoppingCarRecord(@RequestBody String msg) {
+        this.ifDataInIsEmpty(msg);
+        ShoppingCar shoppingCar = shoppingCarService.getOneRecord(msg);
+        return new Resp.Builder<ShoppingCar>()
+                .code("200")
+                .msg("success")
+                .data(shoppingCar)
+                .build();
+    }
+
+    @PostMapping("/api/v1/shopping/car/")
+    public Resp addOneShoppingCarRecord(@RequestBody String msg) {
+        this.ifDataInIsEmpty(msg);
+        ShoppingCar shoppingCar = shoppingCarService.addOneRecord(msg);
+        return new Resp.Builder<ShoppingCar>()
+                .code("200")
+                .msg("success")
+                .data(shoppingCar)
+                .build();
+    }
+
+    @GetMapping("/api/v1/shopping/car/all/")
+    public Resp getAllRecords(@RequestBody String msg) {
+        this.ifDataInIsEmpty(msg);
+        List<ShoppingCar> list = shoppingCarService.getAllRecords(msg);
+        return new Resp.Builder<List<ShoppingCar>>()
+                .data(list)
+                .code("200")
+                .msg("success")
+                .build();
+    }
 
     private void ifDataInIsEmpty(String msg) {
         if (!"dev".equals(config.mode)&& StringUtils.isEmpty(msg))
