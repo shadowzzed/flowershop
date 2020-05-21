@@ -18,7 +18,6 @@ import java.math.BigDecimal;
 @Entity
 @Data
 @Table(name = "t_flower")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","flowerId"})
 public class Flower implements Serializable {
 
     @Id
@@ -36,4 +35,8 @@ public class Flower implements Serializable {
 
     @Column(name = "flo_stock")
     private int flowerStock;
+
+    @Column(name = "flo_name")
+    private String flowerName;
+
 }
