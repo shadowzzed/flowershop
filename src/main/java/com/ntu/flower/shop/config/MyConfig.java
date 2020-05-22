@@ -44,4 +44,19 @@ public class MyConfig {
     @Value("${value.usr.tel}")
     public String telphone;
 
+    @Value("${value.flower.name}")
+    public String flowerName;
+
+    @Value("${value.flower.type}")
+    public String flowerType;
+
+    @Value("${value.flower.src}")
+    public String flowerImage;
+
+    @Value("${value.flower.stock}")
+    public String flowerStock;
+
+    @Value("${value.flower.price}")
+    public String flowerPrice;
+
 }

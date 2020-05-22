@@ -12,4 +12,5 @@ import java.util.List;
 public interface FlowerService {
     List<Flower> getAllFlowers();
     Flower getOneFlower(String json);
+    Flower publishFlower(String json);
 }

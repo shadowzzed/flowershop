@@ -209,6 +209,17 @@ public class ApiController {
                 .build();
     }
 
+    @PostMapping("/api/v1/flower/one/1")
+    public Resp publishFlower(String msg) {
+        this.ifDataInIsEmpty(msg);
+        Flower flower = flowerService.publishFlower(msg);
+        return new Resp.Builder<Flower>()
+                .msg("success")
+                .code("200")
+                .data(flower)
+                .build();
+    }
+
     private void ifDataInIsEmpty(String msg) {
         if (!"dev".equals(config.mode)&& StringUtils.isEmpty(msg))
             throw new MyException(MyExceptionEnum.JSON_IS_NULL);
